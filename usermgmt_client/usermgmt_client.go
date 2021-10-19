@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	pb "github.com/Abdurazzoq789/moss_grpc/usermgmt"
 	"google.golang.org/grpc"
 	"log"
@@ -37,4 +38,13 @@ func main() {
 		Age: %d
 		ID: %d`, r.GetName(), r.GetAge(), r.GetId())
 	}
+
+	params := &pb.GetUsersParams{}
+	r, err := c.GetUsers(ctx, params)
+	if err != nil {
+		log.Fatalf("could not retrieve users: %v", err)
+	}
+
+	log.Print("\nUSER_LIST: \n")
+	fmt.Printf("r.GetUsers(): %v\n", r.GetUsers())
 }
